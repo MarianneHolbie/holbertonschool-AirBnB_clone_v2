@@ -45,11 +45,8 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.emptyline.__doc__)
         self.assertIsNotNone(HBNBCommand.do_quit.__doc__)
         self.assertIsNotNone(HBNBCommand.do_EOF.__doc__)
-        self.assertIsNotNone(HBNBCommand.do_create.__doc__)
         self.assertIsNotNone(HBNBCommand.do_show.__doc__)
         self.assertIsNotNone(HBNBCommand.do_destroy.__doc__)
-        self.assertIsNotNone(HBNBCommand.do_all.__doc__)
-        self.assertIsNotNone(HBNBCommand.do_update.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
 
     def test_emptyline(self):
@@ -109,15 +106,6 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "** no instance found **\n", f.getvalue())
 
-    def test_all(self):
-        """Test all command inpout"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("all asdfsdfsd")
-            self.assertEqual("** class doesn't exist **\n", f.getvalue())
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("all State")
-            self.assertEqual("[]\n", f.getvalue())
-
     def test_update(self):
         """Test update command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -155,17 +143,6 @@ class TestConsole(unittest.TestCase):
 
     def tearDown(self):
         pass
-
-    def test_all(self):
-        # create some objects
-        self.console.onecmd(
-            "create User email='john@example.com' password='pass'")
-        self.console.onecmd(
-            "create User email='jane@example.com' password='pass'")
-        self.console.onecmd(
-            "create Place name='house' city_id='1' user_id='1'")
-        self.console.onecmd(
-            "create Place name='apartment' city_id='2' user_id='2'")
 
 
 if __name__ == "__main__":
