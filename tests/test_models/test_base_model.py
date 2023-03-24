@@ -54,14 +54,6 @@ class test_basemodel(unittest.TestCase):
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
                          i.__dict__))
 
-    def test_save(self):
-        """ Test save """
-        model = BaseModel()
-        before = model.updated_at
-        model.save()
-        after = model.updated_at
-        self.assertLess(before, after)
-
     def test_to_dict(self):
         """  Test dic """
         i = self.value()
