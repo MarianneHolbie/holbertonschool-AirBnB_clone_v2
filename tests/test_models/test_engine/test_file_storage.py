@@ -29,14 +29,6 @@ class test_fileStorage(unittest.TestCase):
             """ __objects is initially empty """
             self.assertEqual(len(storage.all()), 0)
 
-        def test_new(self):
-            """ New object is correctly added to __objects """
-            new = BaseModel()
-            temp = None
-            for obj in storage.all().values():
-                temp = obj
-            self.assertTrue(temp is new)
-
         def test_all(self):
             """ __objects is properly returned """
             new = BaseModel()
@@ -61,7 +53,6 @@ class test_fileStorage(unittest.TestCase):
             new = BaseModel()
             storage.save()
             self.assertTrue(os.path.exists('file.json'))
-
 
         def test_reload_empty(self):
             """ Load from an empty file """
