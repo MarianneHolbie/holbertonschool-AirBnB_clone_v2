@@ -21,12 +21,12 @@ def cities_byStates():
                 ul tag: list of City linked sorted by name(A->Z)
                 LI tag: description <city.id>: <B><city.name></B>
     """
-    city_states = storage.all()
+    city_states = storage.all(State)
     return render_template('8-cities_by_states.html', states=city_states)
 
 
 @app.teardown_appcontext
-def remove_session(context):
+def remove_session(exception):
     """
         after each request : remove current SQLAlchemy Session
     """
