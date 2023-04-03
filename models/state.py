@@ -3,6 +3,7 @@
 from sqlalchemy import Column, String
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
+from models.city import City
 
 
 class State(BaseModel, Base):
