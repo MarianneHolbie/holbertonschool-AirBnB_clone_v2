@@ -20,12 +20,12 @@ def list_states():
             sorted by name(A->Z)
             LI tag : description of one State:<state.id>: <B><state.name></B>
     """
-    states = storage.all(State)
+    states = storage.all()
     return render_template('7-states_list.html', states=states)
 
 
 @app.teardown_appcontext
-def remove_session():
+def remove_session(context):
     """
         after each request : remove current SQLAlchemy Session
     """
@@ -33,4 +33,4 @@ def remove_session():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port='5000')
