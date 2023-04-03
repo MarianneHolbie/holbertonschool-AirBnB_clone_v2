@@ -3,7 +3,6 @@
     Create flask application instance (app)
 """
 from flask import Flask
-from markupsafe import escape
 from flask import render_template
 from models import storage
 from models.state import State
@@ -20,8 +19,8 @@ def list_states():
             sorted by name(A->Z)
             LI tag : description of one State:<state.id>: <B><state.name></B>
     """
-    states = storage.all()
-    return render_template('7-states_list.html', states=states)
+    states_list = storage.all()
+    return render_template('7-states_list.html', states=states_list)
 
 
 @app.teardown_appcontext
@@ -33,4 +32,4 @@ def remove_session(context):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+    app.run(host='0.0.0.0', port=5000)
