@@ -23,8 +23,8 @@ def cities_byStates():
     """
     bd = storage.all(State)
     city_states = []
-    for data in bd:
-        city_states.append(bd[data])
+    for v in bd.values():
+        city_states.append(v)
     return render_template('8-cities_by_states.html', states=city_states)
 
 
