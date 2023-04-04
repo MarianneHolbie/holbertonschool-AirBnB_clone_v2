@@ -21,7 +21,10 @@ def cities_byStates():
                 ul tag: list of City linked sorted by name(A->Z)
                 LI tag: description <city.id>: <B><city.name></B>
     """
-    city_states = storage.all(State)
+    bd = storage.all(State)
+    city_states = []
+    for data in bd:
+        city_states.append(bd[data])
     return render_template('8-cities_by_states.html', states=city_states)
 
 
