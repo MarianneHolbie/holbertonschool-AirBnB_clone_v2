@@ -4,7 +4,7 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-        {% if hasattr(states, '__iter__') %}
+        {% if states is iterable %}
             <H1>States</H1>
             <UL>
                 {% for state in states.values()| sort(attribute='name') %}
@@ -22,7 +22,7 @@
                 </UL>
         {% else %}
             <H1>Not found!</H1>
-        {% endfor %}
+        {% endif %}
             
     </BODY>
 </HTML>
