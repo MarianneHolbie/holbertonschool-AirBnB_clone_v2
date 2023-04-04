@@ -7,34 +7,28 @@ from flask import render_template
 from models import storage
 from models.state import State
 
+
 app = Flask(__name__)
 
 
 @app.route("/cities_by_states", strict_slashes=False)
-def cities_byStates():
+def cities_by_states():
+    """ display a HTML page with list of cities
+    sorted by states
     """
-        Display a HTML page:
-        h1 tag "States"
-        UL tag list of all State objects present in DBStorage
-            sorted by name(A->Z)
-            LI tag : description of one State:<state.id>: <B><state.name></B>
-                ul tag: list of City linked sorted by name(A->Z)
-                LI tag: description <city.id>: <B><city.name></B>
-    """
-    bd = storage.all(State)
-    city_states = []
-    for v in bd.values():
-        city_states.append(v)
-    return render_template('8-cities_by_states.html', states=city_states)
+    states_list = []
+    states = storage.all(State)
+    for _, v in states.items():
+        states_list.append(v)
+    return render_template("8-cities_by_states.html", states_list=states_list)
 
 
 @app.teardown_appcontext
-def remove_session(exception):
-    """
-        after each request : remove current SQLAlchemy Session
-    """
+def close_session(exception):
+    """ remove the current SQLalchemy session """
     storage.close()
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
