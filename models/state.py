@@ -8,16 +8,24 @@ from models.city import City
 
 class State(BaseModel, Base):
     """ class State """
-    __tablename__ = 'states'
-
+       __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    cities = relationship('City', cascade='all, delete', backref='state')
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
+        cities = relationship("City", backref="states")
+    else:
+        name = ""
 
-    @property
-    def cities(self):
-        from models import storage
-        City_list = []
-        for i in list(storage.all(City).values()):
-            if self.id == i.state_id:
-                City_list.append(i)
-        return City_list
+        @property
+        def cities(self):
+            """getter attribute cities that returns the list of
+            City instances with
+            state_id equals to the current State.id"""
+            from models import storage
+            from models.city import City
+            city_list = []
+            all_city = storage.all(City)
+            for _, v in all_city.items():
+                if self.id == v.state_id:
+                    city_list.append(v)
+            return city_list
+        
