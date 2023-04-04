@@ -18,7 +18,7 @@ class City(BaseModel, Base):
             state_id: ForeignKey (class State), not null string
             place: relationship with class Place
     """
-    __tablename__ = 'cities'
+    __tablename__ = "cities"
 
     name = Column(
         String(128),
@@ -28,4 +28,4 @@ class City(BaseModel, Base):
         ForeignKey('states.id'),
         nullable=False)
     places = relationship(
-        'Place', backref='cities', cascade='delete')
+        "Place", backref="cities")
