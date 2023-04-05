@@ -52,16 +52,13 @@ class DBStorage:
         """ query on the current database session """
         classes = [State, City, User, Place, Review, Amenity]
         result = {}
-        if os.getenv("HBNB_ENV") == "test":
-            all_obj = self.__session.query(State).all()
+        if isinstance(cls, str):
+            all_obj = self.__session.query(cls).all()
         else:
-            if isinstance(cls, str):
-                all_obj = self.__session.query(cls).all()
-            else:
-                all_obj = []
-                for c in classes:
-                    objects = self.__session.query(c).all()
-                    all_obj.extend(objects)
+            all_obj = []
+            for c in classes:
+                objects = self.__session.query(c).all()
+                all_obj.extend(objects)
         for obj in all_obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             result[key] = obj
