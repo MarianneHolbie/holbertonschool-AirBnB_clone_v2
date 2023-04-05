@@ -67,7 +67,6 @@ class DBStorage:
     def new(self, obj):
         """ add new object to the db session """
         self.__session.add(obj)
-        self.save()
 
     def save(self):
         """ save all change by commit in the current db session """
@@ -77,7 +76,6 @@ class DBStorage:
         """ delete object from current db session """
         if obj is not None:
             self.__session.delete(obj)
-        self.save()
 
     def reload(self):
         """ create db table & session"""
