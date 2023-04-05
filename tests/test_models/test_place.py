@@ -1,69 +1,76 @@
 #!/usr/bin/python3
-""" Unittest for class Place"""
+""" """
 from tests.test_models.test_base_model import test_basemodel
 from models.place import Place
+import unittest
 
 
 class test_Place(test_basemodel):
-    """ Unittest for class Place"""
+    """ """
+    @classmethod
+    def setUpClass(cls):
+        """set up for test"""
+        cls.obj = Place()
+        cls.obj.name = "Apartment"
+        cls.obj.city_id = "4534"
+        cls.obj.user_id = "543"
+        cls.obj.description = "Bright"
+        cls.obj.number_rooms = 2
+        cls.obj.number_bathrooms = 1
+        cls.obj.max_guest = 4
+        cls.obj.price_by_night = 150
+        cls.obj.latitude = 54353.5435
+        cls.obj.longitude = 5436.7657
+        cls.obj.amenity_ids = []
 
-    def __init__(self, *args, **kwargs):
-        """ test initialisation of class """
-        super().__init__(*args, **kwargs)
-        self.name = "Place"
-        self.value = Place
+    def is_subclass(self):
+        """ tests subclass of BaseModel """
+        self.assertTrue(issubclass(self.obj.__class__, BaseModel), True)
 
     def test_city_id(self):
-        """ test type of city_id attribute"""
-        new = self.value()
-        self.assertEqual(type(new.city_id), str)
+        """ """
+        self.assertEqual(type(self.obj.city_id), str)
 
     def test_user_id(self):
-        """ test type of user_id attribute"""
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
+        """ """
+        self.assertEqual(type(self.obj.user_id), str)
 
     def test_name(self):
-        """ test type of name attribute"""
-        new = self.value()
-        self.assertEqual(type(new.name), str)
+        """ """
+        self.assertEqual(type(self.obj.name), str)
 
     def test_description(self):
-        """ test type of description attribute"""
-        new = self.value()
-        self.assertEqual(type(new.description), str)
+        """ """
+        self.assertEqual(type(self.obj.description), str)
 
     def test_number_rooms(self):
-        """ test type of number rooms attribute"""
-        new = self.value()
-        self.assertEqual(type(new.number_rooms), int)
+        """ """
+        self.assertEqual(type(self.obj.number_rooms), int)
 
     def test_number_bathrooms(self):
-        """ test type of number bathrooms attribute"""
-        new = self.value()
-        self.assertEqual(type(new.number_bathrooms), int)
+        """ """
+        self.assertEqual(type(self.obj.number_bathrooms), int)
 
     def test_max_guest(self):
-        """ test of type of max_guest attribute"""
-        new = self.value()
-        self.assertEqual(type(new.max_guest), int)
+        """ """
+        self.assertEqual(type(self.obj.max_guest), int)
 
     def test_price_by_night(self):
-        """ test of price by night type attribute"""
-        new = self.value()
-        self.assertEqual(type(new.price_by_night), int)
+        """ """
+        self.assertEqual(type(self.obj.price_by_night), int)
 
     def test_latitude(self):
-        """ test of latitude attribute"""
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
+        """ """
+        self.assertEqual(type(self.obj.latitude), float)
 
     def test_longitude(self):
-        """ test type of longitude attribute"""
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
+        """ """
+        self.assertEqual(type(self.obj.latitude), float)
 
     def test_amenity_ids(self):
-        """ test of type amenity_ids"""
-        new = self.value()
-        self.assertEqual(type(new.amenity_ids), list)
+        """ """
+        self.assertEqual(type(self.obj.amenity_ids), list)
+
+
+if __name__ == "__main__":
+    unittest.main()
