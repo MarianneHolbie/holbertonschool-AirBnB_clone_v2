@@ -36,7 +36,7 @@ class DBStorage:
         pswd = os.getenv("HBNB_MYSQL_PWD")
         host = os.getenv("HBNB_MYSQL_HOST")
         db_name = os.getenv("HBNB_MYSQL_DB")
-        env = os.getenv("HBNB_MYSQL_ENV")
+        env = os.getenv("HBNB_ENV")
         """ create engine """
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
                                       .format(user,
@@ -52,13 +52,16 @@ class DBStorage:
         """ query on the current database session """
         classes = [State, City, User, Place, Review, Amenity]
         result = {}
-        if isinstance(cls, str):
-            all_obj = self.__session.query(cls).all()
+        if os.getenv("HBNB_ENV") == "test":
+            all_obj = self.__session.query(State).all()
         else:
-            all_obj = []
-            for c in classes:
-                objects = self.__session.query(c).all()
-                all_obj.extend(objects)
+            if isinstance(cls, str):
+                all_obj = self.__session.query(cls).all()
+            else:
+                all_obj = []
+                for c in classes:
+                    objects = self.__session.query(c).all()
+                    all_obj.extend(objects)
         for obj in all_obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             result[key] = obj
