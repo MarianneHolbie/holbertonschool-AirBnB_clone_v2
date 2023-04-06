@@ -13,17 +13,17 @@ app = Flask(__name__)
 
 @app.route('/states', strict_slashes=False, methods=["GET"])
 @app.route('/states/<id>', strict_slashes=False, methods=["GET"])
-def states(id=None):
+def states(state_id=None):
     """
         by default no id
         if id extract information of corresponding id
     """
     states = storage.all(State)
 
-    if id is not None:
-        id = 'State.' + id
+    if state_id is not None:
+        state_id = 'State.' + id
 
-    return render_template('9-states.html', states=states, state_id=id)
+    return render_template('9-states.html', states=states, state_id=state_id)
 
 
 @app.teardown_appcontext
