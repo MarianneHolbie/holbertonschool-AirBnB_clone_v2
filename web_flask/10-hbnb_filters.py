@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
     Create flask application instance (app)
+    use storage engine (DBStorage or FileStorage)
 """
 from flask import Flask
 from flask import render_template
@@ -15,8 +16,8 @@ app = Flask(__name__)
 @app.route('/hbnb_filters', strict_slashes=False, methods=["GET"])
 def hbnb_filters(id=None):
     """
-        by default no id
-        if id extract information of corresponding id
+        load all cities of State to implement popover
+        load all amenities to implement popover
     """
     states = storage.all(State)
     amenities = storage.all(Amenity)
