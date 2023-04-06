@@ -11,6 +11,7 @@ from models.amenity import Amenity
 
 app = Flask(__name__)
 
+
 @app.route('/hbnb_filters', strict_slashes=False, methods=["GET"])
 def hbnb_filters(id=None):
     """
