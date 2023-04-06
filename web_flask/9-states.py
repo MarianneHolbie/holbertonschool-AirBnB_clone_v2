@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 @app.route('/states', strict_slashes=False, methods=["GET"])
-@app.route('/states/<id>', strict_slashes=False, methods=["GET"])
+@app.route('/states/<state_id>', strict_slashes=False, methods=["GET"])
 def states(state_id=None):
     """
         by default no id
