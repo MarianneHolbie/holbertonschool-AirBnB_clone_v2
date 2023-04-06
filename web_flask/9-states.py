@@ -11,8 +11,8 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/states', strict_slashes=False)
-@app.route('/states/<id>', strict_slashes=False)
+@app.route('/states', strict_slashes=False, methods=["GET"])
+@app.route('/states/<id>', strict_slashes=False, methods=["GET"])
 def states(id=None):
     """
         by default no id
@@ -20,10 +20,10 @@ def states(id=None):
     """
     states = storage.all(State)
 
-    if id:
-        states = states.get('State.{}'.format(id))
+    if id is not None:
+        id = 'State.' + id
 
-    return render_template('9-states.html', states=states)
+    return render_template('9-states.html', states=states, state_id=id)
 
 
 @app.teardown_appcontext

@@ -4,14 +4,15 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-        {% if states is iterable %}
+        {% if not id %}
             <H1>States</H1>
             <UL>
                 {% for state in states.values()| sort(attribute='name') %}
                     <li>{{state.id}}: <B>{{state.name}}</B></li>
                 {% endfor %}
             </UL>
-        {% elif states != None %}
+        {% elif id in states %}
+            {% set state = states[id] %}
             <H1>States: {{ states.name }}</H1>
             <H3>Cities: </H3>
 
